@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.341309, g: 0.69384587, b: 0.79540986, a: 1}
+  m_IndirectSpecularColor: {r: 0.31982383, g: 0.33618188, b: 0.34082043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -426,9 +426,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.41706893
-  m_Height: 2.5310993
+  m_Height: 2.605037
   m_Direction: 1
-  m_Center: {x: 0.02073282, y: 1.2704201, z: -7.258654e-17}
+  m_Center: {x: 0.02073282, y: 1.2334512, z: -7.258654e-17}
 --- !u!4 &475471157
 Transform:
   m_ObjectHideFlags: 0
@@ -457,8 +457,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 500
-  jumpSpeed: 350
-  groundCheckDistance: 1.2
+  jumpSpeed: 400
+  groundCheckDistance: 0.2
   enemy: {fileID: 4064794}
 --- !u!54 &475471159
 Rigidbody:

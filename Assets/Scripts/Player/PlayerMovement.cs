@@ -8,9 +8,12 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeed = 1.0f;
     public float groundCheckDistance = 0.7f;
 
+    public float fallDownMultiplier = 1.5f;
+
     private float horizontal;
     private Rigidbody player;
     private bool isGround;
+    private PlayerAnimations anim;
 
     // TEMP
     public Transform enemy;
@@ -18,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         player = GetComponent<Rigidbody>();
+        anim = GetComponent<PlayerAnimations>();
         isGround = true;
     }
 
@@ -26,12 +30,24 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
 
+        anim.setYVelocity(player.velocity.y);
+
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
 
-        if(Physics.Raycast(transform.position, transform.up * -1, groundCheckDistance))
+        if (Input.GetButtonDown("Punch"))
+        {
+            Punch();
+        }
+
+        if (Input.GetButtonDown("Kick"))
+        {
+            Kick();
+        }
+
+        if (Physics.Raycast(transform.position, transform.up * -1, groundCheckDistance))
         {
             isGround = true;
         }
@@ -50,6 +66,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
+        // quickly come down when jumps
+        if(player.velocity.y < 0)
+        {
+            player.velocity = new Vector3(player.velocity.x, player.velocity.y * fallDownMultiplier, player.velocity.z);
+        }
+
     }
 
 
@@ -60,11 +82,29 @@ public class PlayerMovement : MonoBehaviour
         player.velocity = new Vector3(moveSpeed, player.velocity.y, player.velocity.z);
     }
 
+    void Kick()
+    {
+        if (isGround)
+        {
+            anim.KickAnim();
+        }
+    }
+
+    void Punch()
+    {
+        if (isGround)
+        {
+            
+            anim.PunchAnim();
+        }
+    }
+
     void Jump()
     {
         if (isGround)
         {
             player.AddForce(transform.up * jumpSpeed);
+            anim.JumpAnim();
         }
             
     }

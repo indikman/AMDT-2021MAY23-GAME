@@ -7,10 +7,10 @@ public class PlayerAnimations : MonoBehaviour
 
     public Animator anim;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -37,5 +37,10 @@ public class PlayerAnimations : MonoBehaviour
     public void setYVelocity(float value)
     {
         anim.SetFloat("Yvelocity", value);
+    }
+
+    public void DieAnim()
+    {
+        anim.SetTrigger("Die");
     }
 }

@@ -15,11 +15,14 @@ public class PlayerMovement : MonoBehaviour
     private bool isGround;
     private PlayerAnimations anim;
 
+    private Player playerController;
+
     // TEMP
     public Transform enemy;
 
     void Start()
     {
+        playerController = GetComponent<Player>();
         player = GetComponent<Rigidbody>();
         anim = GetComponent<PlayerAnimations>();
         isGround = true;
@@ -86,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGround)
         {
+            playerController.EnableKick();
             anim.KickAnim();
         }
     }
@@ -94,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGround)
         {
-            
+            playerController.EnablePunch();
             anim.PunchAnim();
         }
     }

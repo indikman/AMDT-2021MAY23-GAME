@@ -4,21 +4,45 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public PlayerAnimations anim;
+    public EnemyAnimations anim;
 
     public float health = 100f;
+
+
+    public Collider punchCollider;
+    public Collider kickCollider;
+
+    public HitBox punchHit;
+    public HitBox kickHit;
+
+    public float punchDamage;
+    public float kickDamage;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        punchCollider.enabled = false;
+        kickCollider.enabled = false;
+
+        punchHit.SetDamage(punchDamage);
+        kickHit.SetDamage(kickDamage);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void EnablePunch()
+    {
+        punchCollider.enabled = true;
+    }
+
+    public void EnableKick()
+    {
+        kickCollider.enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)

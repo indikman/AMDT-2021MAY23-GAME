@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         // quickly come down when jumps
         if(player.velocity.y < 0)
         {
-            player.velocity = new Vector3(player.velocity.x, player.velocity.y * fallDownMultiplier, player.velocity.z);
+           // player.velocity = new Vector3(player.velocity.x, player.velocity.y * fallDownMultiplier, player.velocity.z);
         }
 
     }
@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGround)
         {
             player.AddForce(transform.up * jumpSpeed);
-            anim.JumpAnim();
+           // anim.JumpAnim();
         }
             
     }

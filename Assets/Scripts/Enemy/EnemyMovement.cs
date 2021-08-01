@@ -34,12 +34,15 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!enemy.isAlive)
+        {
+            state = EnemyState.DEAD;
+        }
+
+
         distanceToPlayer = Mathf.Abs(Vector3.Distance(transform.position, player.position));
 
-
-
-        // Enemey rotates towards the player
-        RotateTowardsPlayer();
+        
 
         if(state == EnemyState.IDLE)
         {
@@ -50,9 +53,11 @@ public class EnemyMovement : MonoBehaviour
                 state = EnemyState.ACTION;
             }
 
+            // Enemey rotates towards the player
+            RotateTowardsPlayer();
 
-
-        }else if (state == EnemyState.ALERT)
+        }
+        else if (state == EnemyState.ALERT)
         {
 
             isFighing = false;
@@ -62,6 +67,9 @@ public class EnemyMovement : MonoBehaviour
             {
                 state = EnemyState.ACTION;
             }
+
+            // Enemey rotates towards the player
+            RotateTowardsPlayer();
 
         }
         else if (state == EnemyState.ACTION)
@@ -75,6 +83,9 @@ public class EnemyMovement : MonoBehaviour
             {
                 state = EnemyState.ALERT;
             }
+
+            // Enemey rotates towards the player
+            RotateTowardsPlayer();
 
             // Wait for a random time and kick/punch
             if (!isFighing)
@@ -114,10 +125,6 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    void MoveTowardsPlayer()
-    {
-
-    }
 
     void Fight()
     {

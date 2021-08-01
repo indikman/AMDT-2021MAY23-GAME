@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     // TEMP
     public Transform enemy;
+    public Joystick inputStick;
 
     void Start()
     {
@@ -31,10 +32,17 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
+        if (!playerController.isAlive)
+            return;
+
+
+
+        // horizontal = Input.GetAxis("Horizontal");
+        horizontal = inputStick.Horizontal;
+        
 
         anim.setYVelocity(player.velocity.y);
-
+        /*
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
@@ -48,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Kick"))
         {
             Kick();
-        }
+        }*/
 
         if (Physics.Raycast(transform.position, transform.up * -1, groundCheckDistance))
         {
@@ -85,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
         player.velocity = new Vector3(moveSpeed, player.velocity.y, player.velocity.z);
     }
 
-    void Kick()
+    public void Kick()
     {
         if (isGround)
         {
@@ -94,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Punch()
+    public void Punch()
     {
         if (isGround)
         {
@@ -103,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Jump()
+    public void Jump()
     {
         if (isGround)
         {

@@ -6,7 +6,7 @@ public class PlayerAnimations : MonoBehaviour
 {
 
     public Animator anim;
-
+    public Joystick inputStick;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,8 @@ public class PlayerAnimations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        anim.SetFloat("Movement", Input.GetAxis("Horizontal"));
+        //anim.SetFloat("Movement", Input.GetAxis("Horizontal"));
+        anim.SetFloat("Movement", inputStick.Horizontal);
     }
 
     public void JumpAnim()

@@ -19,9 +19,15 @@ public class Enemy : MonoBehaviour
     public float kickDamage;
 
 
+    // Enemey live state
+    public bool isAlive;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        isAlive = true;
+
         punchCollider.enabled = false;
         kickCollider.enabled = false;
 
@@ -59,7 +65,12 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        isAlive = false;
         anim.DieAnim();
+
+        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<Collider>().enabled = false;
+
         Debug.Log("Enemy Died!");
     }
 }

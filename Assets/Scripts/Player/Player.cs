@@ -13,9 +13,16 @@ public class Player : MonoBehaviour
     public float punchDamage;
     public float kickDamage;
 
+    public bool isAlive;
+    public float health;
+    public PlayerAnimations anim;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        isAlive = true;
+
         punchCollider.enabled = false;
         kickCollider.enabled = false;
 
@@ -32,6 +39,27 @@ public class Player : MonoBehaviour
     {
         kickCollider.enabled = true;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "hitbox")
+        {
+            health -= other.GetComponent<HitBox>().GetDamage();
+            if (health <= 0)
+            {
+                Die();
+            }
+        }
+    }
+
+    public void Die()
+    {
+        isAlive = false;
+        GetComponent<Collider>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+        anim.DieAnim();
+    }
+
 
     // Update is called once per frame
     void Update()

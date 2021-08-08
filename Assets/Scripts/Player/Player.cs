@@ -14,12 +14,17 @@ public class Player : MonoBehaviour
     public float kickDamage;
 
     public bool isAlive;
-    public float health;
     public PlayerAnimations anim;
+    public float maxHealth = 100f;
+
+    private float health;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        health = maxHealth;
+        GameManager.GetInstance().PlayerHealthUIUpdate(health / maxHealth);
 
         isAlive = true;
 
@@ -45,6 +50,9 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "hitbox")
         {
             health -= other.GetComponent<HitBox>().GetDamage();
+
+            GameManager.GetInstance().PlayerHealthUIUpdate(health / maxHealth);
+
             if (health <= 0)
             {
                 Die();
@@ -58,6 +66,7 @@ public class Player : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
         anim.DieAnim();
+        GameManager.GetInstance().GameOver(2);
     }
 
 

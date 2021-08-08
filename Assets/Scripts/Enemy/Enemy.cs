@@ -6,7 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public EnemyAnimations anim;
 
-    public float health = 100f;
+    private float health = 100f;
+    public float maxHealth = 100;
 
 
     public Collider punchCollider;
@@ -26,6 +27,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
+        GameManager.GetInstance().EnemyHealthUIUpdate(health / maxHealth);
         isAlive = true;
 
         punchCollider.enabled = false;
@@ -56,6 +59,9 @@ public class Enemy : MonoBehaviour
         if(other.gameObject.tag == "hitbox")
         {
             health -= other.GetComponent<HitBox>().GetDamage();
+
+            GameManager.GetInstance().EnemyHealthUIUpdate(health / maxHealth);
+
             if (health <= 0)
             {
                 Die();
@@ -72,5 +78,6 @@ public class Enemy : MonoBehaviour
         GetComponent<Collider>().enabled = false;
 
         Debug.Log("Enemy Died!");
+        GameManager.GetInstance().GameOver(1);
     }
 }
